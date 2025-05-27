@@ -6,5 +6,4 @@ resources:
   - pvc-nextcloud.yaml
   - pvc-mariadb.yaml
   - route-nextcloud.yaml
-  - scc-anyuid.yaml
   - docker-image-pull.yaml
