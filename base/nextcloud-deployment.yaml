@@ -16,9 +16,19 @@ spec:
       containers:
         - name: nextcloud
           image: nextcloud
-          envFrom:
-            - secretRef:
-                name: nextcloud-secret
+          env:
+            - name: MYSQL_HOST
+              value: nextcloud-db
+            - name: MYSQL_DATABASE
+              value: nextcloud
+            - name: MYSQL_USER
+              value: nextcloud
+            - name: MYSQL_PASSWORD
+              value: nextcloudpass
+            - name: NEXTCLOUD_ADMIN_USER
+              value: admin
+            - name: NEXTCLOUD_ADMIN_PASSWORD
+              value: adminpass
           ports:
             - containerPort: 80
           volumeMounts:

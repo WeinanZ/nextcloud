@@ -16,9 +16,15 @@ spec:
       containers:
         - name: mariadb
           image: registry.redhat.io/rhel8/mariadb-105
-          envFrom:
-            - secretRef:
-                name: nextcloud-secret
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootpass
+            - name: MYSQL_DATABASE
+              value: nextcloud
+            - name: MYSQL_USER
+              value: nextcloud
+            - name: MYSQL_PASSWORD
+              value: nextcloudpass
           ports:
             - containerPort: 3306
           volumeMounts:
