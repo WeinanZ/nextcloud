@@ -17,7 +17,7 @@ spec:
         # Add or update these lines under spec.template.spec.securityContext
         runAsUser: 33   # Set to www-data UID (standard for nextcloud:apache)
         fsGroup: 33     # Set the group ownership for the volume to www-data's GID
-        runAsNonRoot: true # Ensure it doesn't try to run as root
+         # Ensure it doesn't try to run as root
       containers:
         - name: nextcloud
           image: nextcloud
@@ -38,7 +38,7 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: nextcloud-storage
-              mountPath: /var/www/html
+              mountPath: /var/www/html/data
       volumes:
         - name: nextcloud-storage
           persistentVolumeClaim:
