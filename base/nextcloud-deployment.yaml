@@ -15,13 +15,7 @@ spec:
     metadata:
       labels:
         app: nextcloud
-    spec:
-      securityContext:
-        # Crucial for Nextcloud on OpenShift to ensure write permissions to mounted volumes.
-        # The 'nextcloud:apache' image runs as www-data user (UID 33).
-        runAsUser: 33   # Specifies the user ID to run the container process
-        fsGroup: 33     # Ensures mounted volumes are owned by GID 33, allowing write access
-        
+    spec:  
       containers:
       - name: nextcloud
         image: nextcloud:apache # Using the official Nextcloud image with Apache web server
