@@ -13,6 +13,11 @@ spec:
       labels:
         app: nextcloud
     spec:
+      securityContext:
+        # Add or update these lines under spec.template.spec.securityContext
+        runAsUser: 33   # Set to www-data UID (standard for nextcloud:apache)
+        fsGroup: 33     # Set the group ownership for the volume to www-data's GID
+        runAsNonRoot: true # Ensure it doesn't try to run as root
       containers:
         - name: nextcloud
           image: nextcloud
