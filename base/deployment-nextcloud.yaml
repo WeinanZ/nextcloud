@@ -7,7 +7,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nextcloud
+      deployment: nextcloud
   template:
     metadata:
       labels:
