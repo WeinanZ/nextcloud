@@ -5,4 +5,5 @@ resources:
   - nextcloud-deployment.yaml
   - nextcloud-pvc.yaml
   - nextcloud-service.yaml
+  - nextcloud-secrets.yaml
   - route.yaml

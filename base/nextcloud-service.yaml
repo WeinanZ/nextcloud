@@ -1,11 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nextcloud
+  name: nextcloud # Internal service name for Nextcloud application
   namespace: nextcloud
+  labels:
+    app: nextcloud
 spec:
   selector:
-    app: nextcloud
+    app: nextcloud # Selects pods with the label 'app: nextcloud'
   ports:
-    - port: 80
-      targetPort: 80
+    - protocol: TCP
+      port: 80 # Service port (external to cluster clients)
+      targetPort: http-web # Targets the named port on the Nextcloud container
