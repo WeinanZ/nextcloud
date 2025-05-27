@@ -13,6 +13,8 @@ spec:
       labels:
         app: nextcloud-db
     spec:
+      securityContext:
+        fsGroup: 27
       containers:
         - name: mariadb
           image: registry.redhat.io/rhel8/mariadb-105
