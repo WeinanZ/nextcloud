@@ -20,8 +20,6 @@ spec:
       containers:
         - name: nextcloud
           image: nextcloud
-          ports:
-            - containerPort: 80
           env:
             - name: MYSQL_DATABASE
               value: nextcloud
