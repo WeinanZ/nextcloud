@@ -7,34 +7,40 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nextcloud-db
+      deployment: nextcloud-db
   template:
     metadata:
       labels:
-        app: nextcloud-db
+        deployment: nextcloud-db
     spec:
+      volumes:
+        - name: mariadb-data
+          persistentVolumeClaim:
+            claimName: pvc-mariadb
       containers:
         - name: mariadb
           image: registry.redhat.io/rhel8/mariadb-105
           env:
             - name: MYSQL_DATABASE
               value: nextcloud
+            - name: MYSQL_PASSWORD
+              value: nextcloudpass
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootpass
             - name: MYSQL_USER
               value: nextcloud
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: nextcloud-db-secret
-                  key: MYSQL_PASSWORD
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: nextcloud-db-secret
-                  key: MYSQL_ROOT_PASSWORD
-          volumeMounts:
-            - mountPath: /var/lib/mysql/data
-              name: mariadb-data
-      volumes:
-        - name: mariadb-data
-          persistentVolumeClaim:
-            claimName: pvc-mariadb
+          resources: {}
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

@@ -9,5 +9,3 @@ spec:
     name: nextcloud
   port:
     targetPort: 80
-  tls:
-    termination: edge

@@ -5,5 +5,4 @@ resources:
   - service-mariadb.yaml
   - pvc-nextcloud.yaml
   - pvc-mariadb.yaml
-  - secret-db.yaml
   - route-nextcloud.yaml
