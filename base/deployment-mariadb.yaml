@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud-db
+  namespace: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud-db
+  template:
+    metadata:
+      labels:
+        app: nextcloud-db
+    spec:
+      containers:
+        - name: mariadb
+          image: registry.redhat.io/rhel8/mariadb-105
+          env:
+            - name: MYSQL_DATABASE
+              value: nextcloud
+            - name: MYSQL_USER
+              value: nextcloud
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-db-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-db-secret
+                  key: MYSQL_ROOT_PASSWORD
+          volumeMounts:
+            - mountPath: /var/lib/mysql/data
+              name: mariadb-data
+      volumes:
+        - name: mariadb-data
+          persistentVolumeClaim:
+            claimName: pvc-mariadb
