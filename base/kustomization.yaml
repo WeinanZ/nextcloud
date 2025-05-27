@@ -6,4 +6,3 @@ resources:
   - nextcloud-pvc.yaml
   - nextcloud-service.yaml
   - route.yaml
-  - secret.yaml
