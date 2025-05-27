@@ -1,0 +1,9 @@
+resources:
+  - mariadb-deployment.yaml
+  - mariadb-pvc.yaml
+  - mariadb-service.yaml
+  - nextcloud-deployment.yaml
+  - nextcloud-pvc.yaml
+  - nextcloud-service.yaml
+  - route.yaml
+  - secret.yaml
