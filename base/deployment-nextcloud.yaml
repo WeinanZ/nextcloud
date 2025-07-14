@@ -33,7 +33,7 @@ spec:
             - name: NEXTCLOUD_ADMIN_USER
               value: admin
             - name: NEXTCLOUD_TRUSTED_DOMAINS
-              value: localhost,nextcloud,nextcloud.apps.wzocpdev.vmware.tamlab.rdu2.redhat.com
+              value: localhost,nextcloud,nextcloud-nextcloud.apps.wzocpdev.vmware.tamlab.rdu2.redhat.com
           ports:
             - containerPort: 80
               protocol: TCP
