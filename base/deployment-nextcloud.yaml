@@ -30,15 +30,12 @@ spec:
               echo "Patching trusted_domains..."
               sed -i "/'trusted_domains' =>/{
                 N
-                s/array ([^)]*)/array (\n    0 => 'localhost',\n    1 => 'nextcloud',\n    2 => 'nextcloud-nextcloud.apps.wzocpdev.vmware.tamlab.rdu2.redhat.com',\n  )/
+                s/array ([^)]*)/array (\n    0 => 'localhost',\n    1 => 'nextcloud',\n    2 => 'nextcloud.apps.wzocpdev.vmware.tamlab.rdu2.redhat.com',\n  )/
               }" "$CONFIG_FILE"
           volumeMounts:
             - name: nextcloud-data
               mountPath: /var/www/html
-      volumes:
-        - name: nextcloud-data
-          persistentVolumeClaim:
-            claimName: pvc-nextcloud
+
       containers:
         - name: nextcloud
           image: nextcloud
@@ -62,6 +59,10 @@ spec:
           volumeMounts:
             - name: nextcloud-data
               mountPath: /var/www/html
+      volumes:
+        - name: nextcloud-data
+          persistentVolumeClaim:
+            claimName: pvc-nextcloud
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
